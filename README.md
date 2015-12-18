@@ -40,7 +40,9 @@ To use Xfighter in your Mix projects:
 
 Once the installation is complete, type the following command in your terminal:
 
+```
 	iex -S mix
+```
 	
 You should now be able to play Stockfighter:
 
