@@ -18,7 +18,7 @@ defmodule Xfighter.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :httpoison]]
+    [applications: [:httpoison]]
   end
 
   # Dependencies can be Hex packages:
