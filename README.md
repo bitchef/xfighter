@@ -2,6 +2,9 @@
 
 An API wrapper for the programming game [Stockfighter](https://starfighter.readme.io/docs)
 
+*Warning:* the Xfighter code is in flux at the moment. Until version 1.0 expect breakage and
+backward-incompatible changes.
+
 ## Installation
 
 To use Xfighter in your Mix projects:
@@ -10,7 +13,7 @@ To use Xfighter in your Mix projects:
 
   ```elixir
   def deps do
-   [{:xfighter, "~> 0.0.1"}]
+      [{:xfighter, "~> 0.1.0"}]
   end
   ```
 
@@ -18,7 +21,7 @@ To use Xfighter in your Mix projects:
 
   ```elixir
   def application do
-   [applications: [:xfighter]]
+      [applications: [:xfighter]]
   end
   ```
 
@@ -44,15 +47,15 @@ iex -S mix
 ```
 	
 You should now be able to play Stockfighter. You can find a complete documentation
-[here](http://hexdocs.pm/xfighter) for each function's return types.
+[here](http://hexdocs.pm/xfighter) for function return types.
 
-### Check the API is up
+### Check if the API is up
 
 ```elixir
 iex> Xfighter.heartbeat
 ```
 
-### Check a venue is up
+### Check if a venue is up
 
 ```elixir
 iex> Xfighter.Venue.heartbeat("TESTEX")
@@ -63,7 +66,7 @@ iex> Xfighter.Venue.heartbeat("TESTEX")
 iex> Xfighter.Stock.list("TESTEX")
 ```
 
-### The Orderbook for a stock
+### The orderbook for a stock
 
 ```elixir
 iex> Xfighter.Stock.orderbook("FOOBAR", "TESTEX")
@@ -97,13 +100,25 @@ iex> Xfighter.Stock.quote("FOOBAR", "TESTEX")
 iex> Xfighter.Order.status(1649, "FOOBAR", "TESTEX")
 ```
 
+Or if you have an existing `order` of type `Xfighter.Order.t`.
+
+```elixir
+iex> Xfighter.Order.status(order)
+```
+
 ### Cancel an order
 
 ```elixir
 iex> Xfighter.Order.cancel(1649, "FOOBAR", "TESTEX")
 ```
 
-### Status for all orders for an account
+Or if you have an existing `order` of type `Xfighter.Order.t`.
+
+```elixir
+iex> Xfighter.Order.cancel(order)
+```
+
+### Status for all orders in an account
 
 ```elixir
 iex> Xfighter.Account.status("EXB123456", "TESTEX")
@@ -113,6 +128,7 @@ iex> Xfighter.Account.status("EXB123456", "TESTEX")
 ```elixir
 iex> Xfighter.Account.orders("EXB123456", "FOOBAR", "TESTEX")
 ```
+
 
 ## License
 

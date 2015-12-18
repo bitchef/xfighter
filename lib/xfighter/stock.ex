@@ -1,8 +1,16 @@
 defmodule Xfighter.Stock do
   alias Xfighter.Exception.ConnectionError
+  alias Xfighter.Exception.InvalidJSON
   alias Xfighter.Exception.RequestError
+  alias Xfighter.Order
+  alias Xfighter.Orderbook
+  alias Xfighter.Quote
+  alias Xfighter.Symbols
 
-  import Xfighter.API, only: [parse_response: 1, request: 2, request: 3]
+  import Xfighter.API, only: [decode_response: 2, request: 2, request: 3]
+
+  @type symbol :: %{name: String.t, symbol: String.t}
+
 
   @doc """
   List stocks available for trading on a venue.
@@ -11,14 +19,14 @@ defmodule Xfighter.Stock do
 
       iex> Xfighter.Stock.list("TESTEX")
       {:ok,
-       %{ok: true,
+       %Xfighter.Symbols{ok: true,
           symbols: [%{name: "Foreign Owned Occluded Bridge Architecture Resources",
                 symbol: "FOOBAR"}]}}
 
       iex> Xfighter.Stock.list("TEST")
       {:error, {:request, "Error 404:  No venue exists with the symbol TEST"}}
   """
-  @spec list(String.t) :: {:ok, Map.t} | {:error, tuple}
+  @spec list(String.t) :: {:ok, Symbols.t} | {:error, tuple}
 
   def list(venue) when is_bitstring(venue) do
     try do
@@ -26,6 +34,7 @@ defmodule Xfighter.Stock do
     rescue
       e in RequestError -> {:error, {:request, RequestError.message(e)}}
       e in ConnectionError -> {:error, {:connection, ConnectionError.message(e)}}
+      e in InvalidJSON -> {:error, {:json, InvalidJSON.message(e)}}
     end
   end
 
@@ -38,21 +47,23 @@ defmodule Xfighter.Stock do
 
   An `UnhandledAPIResponse` exception is raised if an unexpected event occurs.
 
+  An `InvalidJSON` is raised if the response is not a valid JSON.
+
   ## Examples:
 
       iex> Xfighter.Stock.list!("TESTEX")
-       %{ok: true,
+       %Xfighter.Symbols{ok: true,
           symbols: [%{name: "Foreign Owned Occluded Bridge Architecture Resources",
                 symbol: "FOOBAR"}]}
 
       iex> Xfighter.Stock.list!("TEST")
       ** (RequestError) Error 404:  No venue exists with the symbol TEST
   """
-  @spec list(String.t) :: Map.t
+  @spec list!(String.t) :: Symbols.t
 
   def list!(venue) when is_bitstring(venue) do
     request(:get, "/venues/#{venue}/stocks")
-    |> parse_response
+    |> decode_response(as: Symbols)
   end
 
   @doc """
@@ -61,7 +72,7 @@ defmodule Xfighter.Stock do
   ## Examples:
       iex> Xfighter.Stock.orderbook("FOOBAR", "TESTEX")
       {:ok,
-       %{asks: [%{isBuy: false, price: 6000, qty: 3320},
+       %Xfighter.Orderbook{asks: [%{isBuy: false, price: 6000, qty: 3320},
                 %{isBuy: false, price: 6000, qty: 5000}],
          bids: [%{isBuy: true, price: 5850, qty: 2554654},
                 %{isBuy: true, price: 5000, qty: 375879}],
@@ -71,7 +82,7 @@ defmodule Xfighter.Stock do
       iex> Xfighter.Stock.orderbook("FOOBAR", "TEST")
       {:error, {:request, "Error 404:  No venue exists with the symbol TEST"}}
   """
-  @spec orderbook(String.t, String.t) :: {:ok, Map.t} | {:error, tuple}
+  @spec orderbook(String.t, String.t) :: {:ok, Orderbook.t} | {:error, tuple}
 
   def orderbook(stock, venue) when is_bitstring(stock) and is_bitstring(venue) do
     try do
@@ -79,6 +90,7 @@ defmodule Xfighter.Stock do
     rescue
       e in RequestError -> {:error, {:request, RequestError.message(e)}}
       e in ConnectionError -> {:error, {:connection, ConnectionError.message(e)}}
+      e in InvalidJSON -> {:error, {:json, InvalidJSON.message(e)}}
     end
   end
 
@@ -92,10 +104,12 @@ defmodule Xfighter.Stock do
 
   An `UnhandledAPIResponse` exception is raised if an unexpected event occurs.
 
+  An `InvalidJSON` is raised if the response is not a valid JSON.
+
   ## Examples:
 
       iex> Xfighter.Stock.orderbook!("FOOBAR", "TESTEX")
-       %{asks: [%{isBuy: false, price: 6000, qty: 3320},
+       %Xfighter.Orderbook{asks: [%{isBuy: false, price: 6000, qty: 3320},
                 %{isBuy: false, price: 6000, qty: 5000}],
          bids: [%{isBuy: true, price: 5850, qty: 2554654},
                 %{isBuy: true, price: 5000, qty: 375879}],
@@ -105,11 +119,11 @@ defmodule Xfighter.Stock do
       iex> Xfighter.Stock.orderbook!("FOOBAR", "TEST")
       ** (RequestError) Error 404:  No venue exists with the symbol TEST
   """
-  @spec orderbook!(String.t, String.t) :: Map.t
+  @spec orderbook!(String.t, String.t) :: Orderbook.t
 
   def orderbook!(stock, venue) when is_bitstring(stock) and is_bitstring(venue) do
     request(:get, "/venues/#{venue}/stocks/#{stock}")
-    |> parse_response
+    |> decode_response(as: Orderbook)
   end
 
   @doc """
@@ -119,7 +133,7 @@ defmodule Xfighter.Stock do
 
       iex> Xfighter.Stock.quote("FOOBAR", "TESTEX")
       {:ok,
-       %{ask: 6000, askDepth: 8310, askSize: 8310, bid: 5850, bidDepth: 21273447,
+       %Xfighter.Quote{ask: 6000, askDepth: 8310, askSize: 8310, bid: 5850, bidDepth: 21273447,
          bidSize: 20437211, last: 6000, lastSize: 10,
          lastTrade: "2015-12-17T23:47:02.081622723Z", ok: true,
          quoteTime: "2015-12-17T23:52:55.44241142Z", symbol: "FOOBAR",
@@ -128,7 +142,7 @@ defmodule Xfighter.Stock do
       iex> Xfighter.Stock.quote("F", "TESTEX")
       {:error, {:request, "Error 404:  Stock F does not trade on venue TESTEX"}}
   """
-  @spec quote(String.t, String.t) :: {:ok, Map.t} | {:error, tuple}
+  @spec quote(String.t, String.t) :: {:ok, Quote.t} | {:error, tuple}
 
   def quote(stock, venue) do
     try do
@@ -136,6 +150,7 @@ defmodule Xfighter.Stock do
     rescue
       e in RequestError -> {:error, {:request, RequestError.message(e)}}
       e in ConnectionError -> {:error, {:connection, ConnectionError.message(e)}}
+      e in InvalidJSON -> {:error, {:json, InvalidJSON.message(e)}}
     end
   end
 
@@ -151,23 +166,25 @@ defmodule Xfighter.Stock do
 
   An `UnhandledAPIResponse` exception is raised if an unexpected event occurs.
 
+  An `InvalidJSON` is raised if the response is not a valid JSON.
+
   Examples:
 
       iex> Xfighter.Stock.quote!("FOOBAR", "TESTEX")
-       %{ask: 6000, askDepth: 8310, askSize: 8310, bid: 5850, bidDepth: 21273447,
+       %Xfighter.Quote{ask: 6000, askDepth: 8310, askSize: 8310, bid: 5850, bidDepth: 21273447,
          bidSize: 20437211, last: 6000, lastSize: 10,
-         lastTrade: "2015-12-17T23:47:02.081622723Z", ok: true,
+         lastTrade: "2015-12-17T23:47:02.081622723Z",ok: true,
          quoteTime: "2015-12-17T23:52:55.44241142Z", symbol: "FOOBAR",
          venue: "TESTEX"}
 
       iex> Xfighter.Stock.quote!("F", "TESTEX")
       ** (RequestError) Error 404:  Stock F does not trade on venue TESTEX
   """
-  @spec quote!(String.t, String.t) :: Map.t
+  @spec quote!(String.t, String.t) :: Quote.t
 
   def quote!(stock, venue) do
     request(:get, "/venues/#{venue}/stocks/#{stock}/quote")
-    |> parse_response
+    |> decode_response(as: Quote)
   end
 
   @doc """
@@ -177,7 +194,7 @@ defmodule Xfighter.Stock do
 
       iex> Xfighter.Stock.buy(10, "FOOBAR", "TESTEX", "EXB123456", "market")
       {:ok,
-       %{account: "EXB123456", direction: "buy",
+       %Xfighter.Order{account: "EXB123456", direction: "buy",
          fills: [%{price: 6000, qty: 10, ts: "2015-12-17T23:47:02.081622723Z"}],
          id: 1636, ok: true, open: false, orderType: "market", originalQty: 10,
          price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
@@ -190,7 +207,7 @@ defmodule Xfighter.Stock do
       iex> Xfighter.Stock.buy(10, "F", "TESTEX", "EXB123456", "limit", 50.16)
       {:error, {:request, "Error 200:  symbol F does not exist on venue TESTEX"}}
   """
-  @spec buy(non_neg_integer, String.t, String.t, String.t, String.t, non_neg_integer) :: {:ok, Map.t} | {:error, tuple}
+  @spec buy(non_neg_integer, String.t, String.t, String.t, String.t, non_neg_integer) :: {:ok, Order.t} | {:error, tuple}
 
   def buy(qty, stock, venue, account, order_type, price \\ 0) do
     try do
@@ -198,6 +215,7 @@ defmodule Xfighter.Stock do
     rescue
       e in RequestError -> {:error, {:request, RequestError.message(e)}}
       e in ConnectionError -> {:error, {:connection, ConnectionError.message(e)}}
+      e in InvalidJSON -> {:error, {:json, InvalidJSON.message(e)}}
     end
   end
 
@@ -214,10 +232,12 @@ defmodule Xfighter.Stock do
 
   An `UnhandledAPIResponse` exception is raised if an unexpected event occurs.
 
+  An `InvalidJSON` is raised if the response is not a valid JSON.
+
   ## Examples:
 
       iex> Xfighter.Stock.buy!(10, "FOOBAR", "TESTEX", "EXB123456", "market")
-       %{account: "EXB123456", direction: "buy",
+       %Xfighter.Order{account: "EXB123456", direction: "buy",
          fills: [%{price: 6000, qty: 10, ts: "2015-12-17T23:47:02.081622723Z"}],
          id: 1636, ok: true, open: false, orderType: "market", originalQty: 10,
          price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
@@ -230,7 +250,7 @@ defmodule Xfighter.Stock do
       iex> Xfighter.Stock.buy!(10, "F", "TESTEX", "EXB123456", "limit", 50.16)
       ** (RequestError) Error 200:  symbol F does not exist on venue TESTEX
   """
-  @spec buy!(non_neg_integer, String.t, String.t, String.t, String.t, non_neg_integer) :: Map.t
+  @spec buy!(non_neg_integer, String.t, String.t, String.t, String.t, non_neg_integer) :: Order.t
   def buy!(qty, stock, venue, account, order_type, price \\ 0)
   def buy!(qty, stock, venue, account, "fok", price) do
     buy!(qty, stock, venue, account, "fill-or-kill", price)
@@ -249,7 +269,7 @@ defmodule Xfighter.Stock do
 
       iex> Xfighter.Stock.sell(10, "FOOBAR", "TESTEX", "EXB123456", "market")
       {:ok,
-       %{account: "EXB123456", direction: "sell",
+       %Xfighter.Order{account: "EXB123456", direction: "sell",
          fills: [%{price: 5850, qty: 10, ts: "2015-12-17T23:49:14.340308147Z"}],
          id: 1637, ok: true, open: false, orderType: "market", originalQty: 10,
          price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
@@ -262,7 +282,7 @@ defmodule Xfighter.Stock do
       iex> Xfighter.Stock.sell(10, "F", "TESTEX", "EXB123456", "limit", 50.16)
       {:error, {:request, "Error 200:  symbol F does not exist on venue TESTEX"}}
   """
-  @spec sell(non_neg_integer, String.t, String.t, String.t, String.t, non_neg_integer) :: {:ok, Map.t} | {:error, tuple}
+  @spec sell(non_neg_integer, String.t, String.t, String.t, String.t, non_neg_integer) :: {:ok, Order.t} | {:error, tuple}
 
   def sell(qty, stock, venue, account, order_type, price \\ 0) do
     try do
@@ -270,6 +290,7 @@ defmodule Xfighter.Stock do
     rescue
       e in RequestError -> {:error, {:request, RequestError.message(e)}}
       e in ConnectionError -> {:error, {:connection, ConnectionError.message(e)}}
+      e in InvalidJSON -> {:error, {:json, InvalidJSON.message(e)}}
     end
   end
 
@@ -286,10 +307,12 @@ defmodule Xfighter.Stock do
 
   An `UnhandledAPIResponse` exception is raised if an unexpected event occurs.
 
+  An `InvalidJSON` is raised if the response is not a valid JSON.
+
   ## Examples:
 
       iex> Xfighter.Stock.sell!(10, "FOOBAR", "TESTEX", "EXB123456", "market")
-       %{account: "EXB123456", direction: "sell",
+       %Xfighter.Order{account: "EXB123456", direction: "sell",
          fills: [%{price: 5850, qty: 10, ts: "2015-12-17T23:49:14.340308147Z"}],
          id: 1637, ok: true, open: false, orderType: "market", originalQty: 10,
          price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
@@ -302,7 +325,7 @@ defmodule Xfighter.Stock do
       iex> Xfighter.Stock.sell!(10, "F", "TESTEX", "EXB123456", "limit", 50.16)
       ** (RequestError) Error 200:  symbol F does not exist on venue TESTEX
   """
-  @spec sell!(non_neg_integer, String.t, String.t, String.t, String.t, non_neg_integer) :: Map.t
+  @spec sell!(non_neg_integer, String.t, String.t, String.t, String.t, non_neg_integer) :: Order.t
 
   def sell!(qty, stock, venue, account, order_type, price \\ 0)
   def sell!(qty, stock, venue, account, "fok", price) do
@@ -325,7 +348,7 @@ defmodule Xfighter.Stock do
       "direction" => direction} |> Poison.encode!
 
     request(:post, "/venues/#{venue}/stocks/#{stock}/orders", order)
-    |> parse_response
+    |> decode_response(as: Order)
   end
 
 end #defmodule

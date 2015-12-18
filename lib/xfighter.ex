@@ -15,11 +15,12 @@ defmodule Xfighter do
   def heartbeat do
     try do
       case request(:get, "/heartbeat") do
-        {200, %{:ok => true}} -> true
+        {200, _body} -> true
         _otherwise -> false
       end
     rescue
       _e in ConnectionError -> false
+      _e in InvalidJSON -> false
     end
   end
 
