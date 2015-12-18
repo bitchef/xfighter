@@ -1,20 +1,20 @@
-defmodule Xfighter do
+defmodule Xfighter.Venue do
   alias Xfighter.Exception.ConnectionError
   import Xfighter.API, only: [request: 2]
   require Logger
 
   @doc """
-  A simple health check for the API.
+  Check if a venue is up.
 
   ## Example:
-  iex> Xfighter.heartbeat
+  iex> Xfighter.Venue.heartbeat("TESTEX")
   true
   """
-  @spec heartbeat :: boolean
+  @spec heartbeat(String.t) :: boolean
 
-  def heartbeat do
+  def heartbeat(venue) when is_bitstring(venue) do
     try do
-      case request(:get, "/heartbeat") do
+      case request(:get, "/venues/#{venue}/heartbeat") do
         {200, %{:ok => true}} -> true
         _otherwise -> false
       end
