@@ -43,45 +43,76 @@ Once the installation is complete, type the following command in your terminal:
 iex -S mix
 ```
 	
-You should now be able to play Stockfighter:
+You should now be able to play Stockfighter. You can find a complete documentation
+[here](http://hexdocs.pm/xfighter) for each function's return types.
+
+### Check the API is up
 
 ```elixir
-
-iex> Xfighter.Venue.heartbeat("TESTEX")
-true
-
-iex> Xfighter.Stock.list("TESTEX")
-{:ok,
- %{ok: true,
-    symbols: [%{name: "Foreign Owned Occluded Bridge Architecture Resources",
-          symbol: "FOOBAR"}]}}
-
-iex> Xfighter.Stock.quote("FOOBAR", "TESTEX")
-{:ok,
- %{ask: 6000, askDepth: 8310, askSize: 8310, bid: 5850, bidDepth: 21273447,
-   bidSize: 20437211, last: 6000, lastSize: 10,
-   lastTrade: "2015-12-17T23:47:02.081622723Z", ok: true,
-   quoteTime: "2015-12-17T23:52:55.44241142Z", symbol: "FOOBAR",
-   venue: "TESTEX"}}
-
-iex> Xfighter.Stock.buy(10, "FOOBAR", "TESTEX","EXB123456",  "market")
-{:ok,
- %{account: "EXB123456", direction: "buy",
-   fills: [%{price: 6000, qty: 10, ts: "2015-12-17T23:47:02.081622723Z"}],
-   id: 1636, ok: true, open: false, orderType: "market", originalQty: 10,
-   price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
-   ts: "2015-12-17T23:47:02.081620689Z", venue: "TESTEX"}}
-
-iex> Xfighter.Stock.sell(10, "FOOBAR", "TESTEX","EXB123456",  "market")
-{:ok,
- %{account: "EXB123456", direction: "sell",
-   fills: [%{price: 5850, qty: 10, ts: "2015-12-17T23:49:14.340308147Z"}],
-   id: 1637, ok: true, open: false, orderType: "market", originalQty: 10,
-   price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
-   ts: "2015-12-17T23:49:14.340304585Z", venue: "TESTEX"}}
+iex> Xfighter.heartbeat
 ```
 
-You can find a complete documentation [here](http://hexdocs.pm/xfighter)
+### Check a venue is up
+
+```elixir
+iex> Xfighter.Venue.heartbeat("TESTEX")
+```
+### Stocks on a venue
+
+```elixir
+iex> Xfighter.Stock.list("TESTEX")
+```
+
+### The Orderbook for a stock
+
+```elixir
+iex> Xfighter.Stock.orderbook("FOOBAR", "TESTEX")
+```
+
+### Place an order for a stock
+
+```elixir
+#Buy order
+iex> Xfighter.Stock.buy(10, "FOOBAR", "TESTEX", "EXB123456", "market")
+iex> Xfighter.Stock.buy(10, "FOOBAR", "TESTEX", "EXB123456", "limit", 50.16)
+iex> Xfighter.Stock.buy(10, "FOOBAR", "TESTEX", "EXB123456", "fok", 40)
+iex> Xfighter.Stock.buy(10, "FOOBAR", "TESTEX", "EXB123456", "ioc", 20.5)
+
+#Sell order
+iex> Xfighter.Stock.sell(10, "FOOBAR", "TESTEX", "EXB123456", "market")
+iex> Xfighter.Stock.sell(10, "FOOBAR", "TESTEX", "EXB123456", "limit", 50.16)
+iex> Xfighter.Stock.sell(10, "FOOBAR", "TESTEX", "EXB123456", "fok", 40)
+iex> Xfighter.Stock.sell(10, "FOOBAR", "TESTEX", "EXB123456", "ioc", 20.5)
+```
+
+### A quote for a stock
+
+```elixir
+iex> Xfighter.Stock.quote("FOOBAR", "TESTEX")
+```
+
+### Status for an existing order
+
+```elixir
+iex> Xfighter.Order.status(1649, "FOOBAR", "TESTEX")
+```
+
+### Cancel an order
+
+```elixir
+iex> Xfighter.Order.cancel(1649, "FOOBAR", "TESTEX")
+```
+
+### Status for all orders for an account
+
+```elixir
+iex> Xfighter.Account.status("EXB123456", "TESTEX")
+```
+### Status for all orders in a stock
+
+```elixir
+iex> Xfighter.Account.orders("EXB123456", "FOOBAR", "TESTEX")
+```
 
 ## License
 
