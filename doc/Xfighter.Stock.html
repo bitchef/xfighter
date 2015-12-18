@@ -1,0 +1,662 @@
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.11.2">
+    <title>Xfighter.Stock – xfighter v0.0.1</title>
+    <link rel="stylesheet" href="dist/app-feafe9a25b.css" />
+    <script src="dist/sidebar_items.js"></script>
+  </head>
+  <body data-type="modules">
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <i class="icon-menu"></i>
+</button>
+<section class="sidebar">
+  <button class="sidebar-toggle">
+    <i class="icon-menu"></i>
+  </button>
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        xfighter
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.0.1
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <i class="icon-search"></i>
+    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+      <li><a id="exceptions-list" href="#full-list">Exceptions</a></li>
+    
+
+    
+  </ul>
+
+  <ul id="full-list" class="sidebar-fullList"></ul>
+  <div class="sidebar-noResults"></div>
+</section>
+
+<section class="content">
+  <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">xfighter v0.0.1</small>
+        Xfighter.Stock
+        
+        
+          <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L1" title="View Source" class="view-source" rel="help">
+            <i class="icon-code"></i>
+          </a>
+        
+      </h1>
+
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <i class="icon-link"></i>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#buy/6">buy(qty, stock, venue, account, order_type, price \\ 0)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Place an order to buy a stock</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#buy!/6">buy!(qty, stock, venue, account, order_type, price \\ 0)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Place an order to buy a stock</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#list/1">list(venue)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>List stocks available for trading on a venue</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#list!/1">list!(venue)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>List stocks available for trading on a venue</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#orderbook/2">orderbook(stock, venue)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Get the orderbook for a particular stock</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#orderbook!/2">orderbook!(stock, venue)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Get the orderbook for a particular stock</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#quote/2">quote(stock, venue)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Get a quick look at the most recent trade information for a stock</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#quote!/2">quote!(stock, venue)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Get a quick look at the most recent trade information for a stock</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#sell/6">sell(qty, stock, venue, account, order_type, price \\ 0)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Place an order to sell a stock</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#sell!/6">sell!(qty, stock, venue, account, order_type, price \\ 0)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Place an order to sell a stock</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="buy/6">
+  <div class="detail-header">
+    <a href="#buy/6" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">buy(qty, stock, venue, account, order_type, price \\ 0)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L195" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">buy(non_neg_integer, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, non_neg_integer) ::
+  {:ok, <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>} |
+  {:error, tuple}</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Place an order to buy a stock.</p>
+<h2>Examples:</h2>
+<pre><code class="iex elixir">iex&gt; Xfighter.Stock.buy(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;,&quot;EXB123456&quot;,  &quot;market&quot;)
+{:ok,
+ %{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
+   fills: [%{price: 6000, qty: 10, ts: &quot;2015-12-17T23:47:02.081622723Z&quot;}],
+   id: 1636, ok: true, open: false, orderType: &quot;market&quot;, originalQty: 10,
+   price: 0, qty: 0, symbol: &quot;FOOBAR&quot;, totalFilled: 10,
+   ts: &quot;2015-12-17T23:47:02.081620689Z&quot;, venue: &quot;TESTEX&quot;}}
+
+iex&gt; Xfighter.Stock.buy(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;limit&quot;, 50.16)
+iex&gt; Xfighter.Stock.buy(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;fok&quot;, 40)
+iex&gt; Xfighter.Stock.buy(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;ioc&quot;, 20.5)
+
+iex&gt; Xfighter.Stock.buy(10, &quot;F&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;limit&quot;, 50.16)
+{:error, {:request, &quot;Error 200:  symbol F does not exist on venue TESTEX&quot;}}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="buy!/6">
+  <div class="detail-header">
+    <a href="#buy!/6" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">buy!(qty, stock, venue, account, order_type, price \\ 0)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L234" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">buy!(non_neg_integer, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, non_neg_integer) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Place an order to buy a stock.</p>
+<p>A <code class="inline">RequestError</code> exception is raised if:</p>
+<ul>
+<li>the venue could not be found
+</li>
+<li>the stock is not traded on the venue
+</li>
+<li>you are not authorized to trade on that account
+</li>
+<li>a request parameter is invalid
+</li>
+</ul>
+<p>A <code class="inline">ConnectionError</code> exception is raised if a connection attempt to the venue failed.</p>
+<p>An <code class="inline">UnhandledAPIResponse</code> exception is raised if an unexpected event occurs.</p>
+<h2>Examples:</h2>
+<pre><code class="iex elixir">iex&gt; Xfighter.Stock.buy!(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;market&quot;)
+ %{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
+   fills: [%{price: 6000, qty: 10, ts: &quot;2015-12-17T23:47:02.081622723Z&quot;}],
+   id: 1636, ok: true, open: false, orderType: &quot;market&quot;, originalQty: 10,
+   price: 0, qty: 0, symbol: &quot;FOOBAR&quot;, totalFilled: 10,
+   ts: &quot;2015-12-17T23:47:02.081620689Z&quot;, venue: &quot;TESTEX&quot;}
+
+iex&gt; Xfighter.Stock.buy!(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;limit&quot;, 50.16)
+iex&gt; Xfighter.Stock.buy!(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;fok&quot;, 40)
+iex&gt; Xfighter.Stock.buy!(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;ioc&quot;, 20.5)
+
+iex&gt; Xfighter.Stock.buy!(10, &quot;F&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;limit&quot;, 50.16)
+** (RequestError) Error 200:  symbol F does not exist on venue TESTEX</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="list/1">
+  <div class="detail-header">
+    <a href="#list/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">list(venue)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L23" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">list(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+        
+          <pre><code class="elixir">list(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: {:ok, <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>} | {:error, tuple}</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>List stocks available for trading on a venue.</p>
+<h2>Examples:</h2>
+<pre><code class="iex elixir">iex&gt; Xfighter.Stock.list(&quot;TESTEX&quot;)
+{:ok,
+ %{ok: true,
+    symbols: [%{name: &quot;Foreign Owned Occluded Bridge Architecture Resources&quot;,
+          symbol: &quot;FOOBAR&quot;}]}}
+
+iex&gt; Xfighter.Stock.list(&quot;TEST&quot;)
+{:error, {:request, &quot;Error 404:  No venue exists with the symbol TEST&quot;}}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="list!/1">
+  <div class="detail-header">
+    <a href="#list!/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">list!(venue)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L53" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+  <section class="docstring">
+    <p>List stocks available for trading on a venue.</p>
+<p>A <code class="inline">RequestError</code> exception is raised if the venue could not be found.</p>
+<p>A <code class="inline">ConnectionError</code> exception is raised if a connection attempt to the venue failed.</p>
+<p>An <code class="inline">UnhandledAPIResponse</code> exception is raised if an unexpected event occurs.</p>
+<h2>Examples:</h2>
+<pre><code class="iex elixir">iex&gt; Xfighter.Stock.list!(&quot;TESTEX&quot;)
+ %{ok: true,
+    symbols: [%{name: &quot;Foreign Owned Occluded Bridge Architecture Resources&quot;,
+          symbol: &quot;FOOBAR&quot;}]}
+
+iex&gt; Xfighter.Stock.list!(&quot;TEST&quot;)
+** (RequestError) Error 404:  No venue exists with the symbol TEST</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="orderbook/2">
+  <div class="detail-header">
+    <a href="#orderbook/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">orderbook(stock, venue)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L76" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">orderbook(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) ::
+  {:ok, <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>} |
+  {:error, tuple}</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Get the orderbook for a particular stock.</p>
+<h2>Examples:</h2>
+<pre><code class="iex elixir">iex&gt; Xfighter.Stock.orderbook(&quot;FOOBAR&quot;, &quot;TESTEX&quot;)
+{:ok,
+ %{asks: [%{isBuy: false, price: 6000, qty: 3320},
+          %{isBuy: false, price: 6000, qty: 5000}],
+   bids: [%{isBuy: true, price: 5850, qty: 2554654},
+          %{isBuy: true, price: 5000, qty: 375879}],
+   ok: true, symbol: &quot;FOOBAR&quot;, ts: &quot;2015-12-17T23:30:37.455298328Z&quot;,
+   venue: &quot;TESTEX&quot;}}
+
+iex&gt; Xfighter.Stock.orderbook(&quot;FOOBAR&quot;, &quot;TEST&quot;)
+{:error, {:request, &quot;Error 404:  No venue exists with the symbol TEST&quot;}}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="orderbook!/2">
+  <div class="detail-header">
+    <a href="#orderbook!/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">orderbook!(stock, venue)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L110" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">orderbook!(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Get the orderbook for a particular stock.</p>
+<p>A <code class="inline">RequestError</code> exception is raised if the venue could not be found or
+the stock is not traded on the venue.</p>
+<p>A <code class="inline">ConnectionError</code> exception is raised if a connection attempt to the venue failed.</p>
+<p>An <code class="inline">UnhandledAPIResponse</code> exception is raised if an unexpected event occurs.</p>
+<h2>Examples:</h2>
+<pre><code class="iex elixir">iex&gt; Xfighter.Stock.orderbook!(&quot;FOOBAR&quot;, &quot;TESTEX&quot;)
+ %{asks: [%{isBuy: false, price: 6000, qty: 3320},
+          %{isBuy: false, price: 6000, qty: 5000}],
+   bids: [%{isBuy: true, price: 5850, qty: 2554654},
+          %{isBuy: true, price: 5000, qty: 375879}],
+   ok: true, symbol: &quot;FOOBAR&quot;, ts: &quot;2015-12-17T23:30:37.455298328Z&quot;,
+   venue: &quot;TESTEX&quot;}
+
+iex&gt; Xfighter.Stock.orderbook!(&quot;FOOBAR&quot;, &quot;TEST&quot;)
+** (RequestError) Error 404:  No venue exists with the symbol TEST</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="quote/2">
+  <div class="detail-header">
+    <a href="#quote/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">quote(stock, venue)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L133" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">quote(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) ::
+  {:ok, <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>} |
+  {:error, tuple}</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Get a quick look at the most recent trade information for a stock.</p>
+<p>Examples:</p>
+<pre><code class="iex elixir">iex&gt; Xfighter.Stock.quote(&quot;FOOBAR&quot;, &quot;TESTEX&quot;)
+{:ok,
+ %{ask: 6000, askDepth: 8310, askSize: 8310, bid: 5850, bidDepth: 21273447,
+   bidSize: 20437211, last: 6000, lastSize: 10,
+   lastTrade: &quot;2015-12-17T23:47:02.081622723Z&quot;, ok: true,
+   quoteTime: &quot;2015-12-17T23:52:55.44241142Z&quot;, symbol: &quot;FOOBAR&quot;,
+   venue: &quot;TESTEX&quot;}}
+
+iex&gt; Xfighter.Stock.quote(&quot;F&quot;, &quot;TESTEX&quot;)
+{:error, {:request, &quot;Error 404:  Stock F does not trade on venue TESTEX&quot;}}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="quote!/2">
+  <div class="detail-header">
+    <a href="#quote!/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">quote!(stock, venue)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L168" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">quote!(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Get a quick look at the most recent trade information for a stock.</p>
+<p>A <code class="inline">RequestError</code> exception is raised if:</p>
+<ul>
+<li>the venue could not be found
+</li>
+<li>the stock is not traded on the venue
+</li>
+<li>a request parameter is invalid
+</li>
+</ul>
+<p>A <code class="inline">ConnectionError</code> exception is raised if a connection attempt to the venue failed.</p>
+<p>An <code class="inline">UnhandledAPIResponse</code> exception is raised if an unexpected event occurs.</p>
+<p>Examples:</p>
+<pre><code class="iex elixir">iex&gt; Xfighter.Stock.quote!(&quot;FOOBAR&quot;, &quot;TESTEX&quot;)
+ %{ask: 6000, askDepth: 8310, askSize: 8310, bid: 5850, bidDepth: 21273447,
+   bidSize: 20437211, last: 6000, lastSize: 10,
+   lastTrade: &quot;2015-12-17T23:47:02.081622723Z&quot;, ok: true,
+   quoteTime: &quot;2015-12-17T23:52:55.44241142Z&quot;, symbol: &quot;FOOBAR&quot;,
+   venue: &quot;TESTEX&quot;}
+
+iex&gt; Xfighter.Stock.quote!(&quot;F&quot;, &quot;TESTEX&quot;)
+** (RequestError) Error 404:  Stock F does not trade on venue TESTEX</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="sell/6">
+  <div class="detail-header">
+    <a href="#sell/6" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">sell(qty, stock, venue, account, order_type, price \\ 0)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L267" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">sell(non_neg_integer, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, non_neg_integer) ::
+  {:ok, <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>} |
+  {:error, tuple}</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Place an order to sell a stock.</p>
+<h2>Examples:</h2>
+<pre><code class="iex elixir">iex&gt; Xfighter.Stock.sell(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;,&quot;EXB123456&quot;,  &quot;market&quot;)
+{:ok,
+ %{account: &quot;EXB123456&quot;, direction: &quot;sell&quot;,
+   fills: [%{price: 5850, qty: 10, ts: &quot;2015-12-17T23:49:14.340308147Z&quot;}],
+   id: 1637, ok: true, open: false, orderType: &quot;market&quot;, originalQty: 10,
+   price: 0, qty: 0, symbol: &quot;FOOBAR&quot;, totalFilled: 10,
+   ts: &quot;2015-12-17T23:49:14.340304585Z&quot;, venue: &quot;TESTEX&quot;}}
+
+iex&gt; Xfighter.Stock.sell(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;limit&quot;, 50.16)
+iex&gt; Xfighter.Stock.sell(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;fok&quot;, 40)
+iex&gt; Xfighter.Stock.sell(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;ioc&quot;, 20.5)
+
+iex&gt; Xfighter.Stock.sell(10, &quot;F&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;limit&quot;, 50.16)
+{:error, {:request, &quot;Error 200:  symbol F does not exist on venue TESTEX&quot;}}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="sell!/6">
+  <div class="detail-header">
+    <a href="#sell!/6" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">sell!(qty, stock, venue, account, order_type, price \\ 0)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L307" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">sell!(non_neg_integer, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, non_neg_integer) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Place an order to sell a stock.</p>
+<p>A <code class="inline">RequestError</code> exception is raised if:</p>
+<ul>
+<li>the venue could not be found
+</li>
+<li>the stock is not traded on the venue
+</li>
+<li>you are not authorized to trade on that account
+</li>
+<li>a request parameter is invalid
+</li>
+</ul>
+<p>A <code class="inline">ConnectionError</code> exception is raised if a connection attempt to the venue failed.</p>
+<p>An <code class="inline">UnhandledAPIResponse</code> exception is raised if an unexpected event occurs.</p>
+<h2>Examples:</h2>
+<pre><code class="iex elixir">iex&gt; Xfighter.Stock.sell!(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;market&quot;)
+ %{account: &quot;EXB123456&quot;, direction: &quot;sell&quot;,
+   fills: [%{price: 5850, qty: 10, ts: &quot;2015-12-17T23:49:14.340308147Z&quot;}],
+   id: 1637, ok: true, open: false, orderType: &quot;market&quot;, originalQty: 10,
+   price: 0, qty: 0, symbol: &quot;FOOBAR&quot;, totalFilled: 10,
+   ts: &quot;2015-12-17T23:49:14.340304585Z&quot;, venue: &quot;TESTEX&quot;}
+
+iex&gt; Xfighter.Stock.sell!(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;limit&quot;, 50.16)
+iex&gt; Xfighter.Stock.sell!(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;fok&quot;, 40)
+iex&gt; Xfighter.Stock.sell!(10, &quot;FOOBAR&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;ioc&quot;, 20.5)
+
+iex&gt; Xfighter.Stock.sell!(10, &quot;F&quot;, &quot;TESTEX&quot;, &quot;EXB123456&quot;, &quot;limit&quot;, 50.16)
+** (RequestError) Error 200:  symbol F does not exist on venue TESTEX</code></pre>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+
+      
+        <footer class="footer">
+      <p>
+        <span class="line">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.11.2),
+        </span>
+        <span class="line">
+          designed by
+          <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+      </p>
+      <button class="night-mode-toggle" />
+    </footer>
+  </div>
+</section>
+</div>
+  <script src="dist/app-1d1b741c5e.js"></script>
+  </body>
+</html>
+
