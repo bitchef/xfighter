@@ -175,7 +175,7 @@ defmodule Xfighter.Stock do
 
   ## Examples:
 
-      iex> Xfighter.Stock.buy(10, "FOOBAR", "TESTEX","EXB123456",  "market")
+      iex> Xfighter.Stock.buy(10, "FOOBAR", "TESTEX", "EXB123456", "market")
       {:ok,
        %{account: "EXB123456", direction: "buy",
          fills: [%{price: 6000, qty: 10, ts: "2015-12-17T23:47:02.081622723Z"}],
@@ -247,7 +247,7 @@ defmodule Xfighter.Stock do
 
   ## Examples:
 
-      iex> Xfighter.Stock.sell(10, "FOOBAR", "TESTEX","EXB123456",  "market")
+      iex> Xfighter.Stock.sell(10, "FOOBAR", "TESTEX", "EXB123456", "market")
       {:ok,
        %{account: "EXB123456", direction: "sell",
          fills: [%{price: 5850, qty: 10, ts: "2015-12-17T23:49:14.340308147Z"}],
