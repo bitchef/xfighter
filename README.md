@@ -26,7 +26,7 @@ To use Xfighter in your Mix projects:
   4. Add the following line to your `config/config.exs` and insert your API key:
 
   ```elixir
-  	config :xfighter, api\_key: "INSERT\_YOUR\_API\_KEY\_HERE"
+  	config :xfighter, api_key: "INSERT_YOUR_API_KEY_HERE"
   ```
 
   3. To download and install the package run:
