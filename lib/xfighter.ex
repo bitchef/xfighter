@@ -1,0 +1,2 @@
+defmodule Xfighter do
+end

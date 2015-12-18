@@ -1,0 +1,10 @@
+/_build
+/cover
+/deps
+/docs
+/ebin
+/log
+erl_crash.dump
+*.ez
+*.swp
+*~
