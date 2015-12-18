@@ -45,6 +45,7 @@ Once the installation is complete, type the following command in your terminal:
 You should now be able to play Stockfighter:
 
 ```elixir
+
   	iex> Xfighter.Venue.heartbeat("TESTEX")
   	true
 
@@ -79,7 +80,7 @@ You should now be able to play Stockfighter:
       	   ts: "2015-12-17T23:49:14.340304585Z", venue: "TESTEX"}}
 ```
 
-You can find a complete documentation [here]()
+You can find a complete documentation [here](http://hexdocs.pm/xfighter)
 
 ## License
 
