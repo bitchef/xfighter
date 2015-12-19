@@ -2,7 +2,7 @@
 
 An API wrapper for the programming game [Stockfighter](https://starfighter.readme.io/docs)
 
-*Warning:* the Xfighter code is in flux at the moment. Until version 1.0 expect breakage and
+**Warning:** the Xfighter code is in flux at the moment. Until version 1.0 expect breakage and
 backward-incompatible changes.
 
 ## Installation
@@ -103,6 +103,7 @@ iex> Xfighter.Order.status(1649, "FOOBAR", "TESTEX")
 Or if you have an existing `order` of type `Xfighter.Order.t`.
 
 ```elixir
+iex> order = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
 iex> Xfighter.Order.status(order)
 ```
 
@@ -115,6 +116,7 @@ iex> Xfighter.Order.cancel(1649, "FOOBAR", "TESTEX")
 Or if you have an existing `order` of type `Xfighter.Order.t`.
 
 ```elixir
+iex> order = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
 iex> Xfighter.Order.cancel(order)
 ```
 

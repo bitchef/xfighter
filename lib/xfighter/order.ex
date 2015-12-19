@@ -47,6 +47,7 @@ defmodule Xfighter.Order do
 
   ## Examples:
 
+      iex> order = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
       iex> Xfighter.Order.status(order)
       {:ok,
        %Xfighter.OrderStatus{account: "EXB123456", direction: "buy",
@@ -162,6 +163,7 @@ defmodule Xfighter.Order do
 
   ## Examples:
 
+      iex> order = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
       iex> Xfighter.Order.cancel(order)
       {:ok,
        %Xfighter.OrderStatus{account: "EXB123456", direction: "buy",

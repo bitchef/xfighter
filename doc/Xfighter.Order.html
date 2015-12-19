@@ -227,7 +227,7 @@
     </a>
     <span class="signature">cancel(order)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L180" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L182" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -247,7 +247,8 @@
   <section class="docstring">
     <p>Cancel an order.</p>
 <h2>Examples:</h2>
-<pre><code class="iex elixir">iex&gt; Xfighter.Order.cancel(order)
+<pre><code class="iex elixir">iex&gt; order = %Xfighter.Order(:id =&gt; 1649, :symbol =&gt; &quot;FOOBAR&quot;, :venue =&gt; &quot;TESTEX&quot;)
+iex&gt; Xfighter.Order.cancel(order)
 {:ok,
  %Xfighter.OrderStatus{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
    fills: [%{price: 6000, qty: 10, ts: &quot;2015-12-18T00:03:40.640740258Z&quot;}],
@@ -269,7 +270,7 @@ iex&gt; Xfighter.Order.cancel(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">cancel(order_id, stock, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L202" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L204" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -311,7 +312,7 @@ iex&gt; Xfighter.Order.cancel(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">cancel!(order)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L240" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L242" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -360,7 +361,7 @@ iex&gt; Xfighter.Order.cancel!(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">cancel!(order_id, stock, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L270" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L272" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -409,7 +410,7 @@ iex&gt; Xfighter.Order.cancel!(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">status(order)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L65" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L66" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -429,7 +430,8 @@ iex&gt; Xfighter.Order.cancel!(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
   <section class="docstring">
     <p>Get the status of an existing order.</p>
 <h2>Examples:</h2>
-<pre><code class="iex elixir">iex&gt; Xfighter.Order.status(order)
+<pre><code class="iex elixir">iex&gt; order = %Xfighter.Order(:id =&gt; 1649, :symbol =&gt; &quot;FOOBAR&quot;, :venue =&gt; &quot;TESTEX&quot;)
+iex&gt; Xfighter.Order.status(order)
 {:ok,
  %Xfighter.OrderStatus{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
    fills: [%{price: 6000, qty: 10, ts: &quot;2015-12-18T00:03:40.640740258Z&quot;}],
@@ -451,7 +453,7 @@ iex&gt; Xfighter.Order.status(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">status(order_id, stock, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L87" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L88" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -493,7 +495,7 @@ iex&gt; Xfighter.Order.status(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">status!(order)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L125" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L126" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -542,7 +544,7 @@ iex&gt; Xfighter.Order.status!(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">status!(order_id, stock, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L155" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L156" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
