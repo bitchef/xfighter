@@ -1,9 +1,13 @@
 # Xfighter
 
-An API wrapper for the programming game [Stockfighter](https://starfighter.readme.io/docs)
+A library API for the programming game [Stockfighter](https://starfighter.readme.io/docs)
 
 **Warning:** the Xfighter code is in flux at the moment. Until version 1.0 expect breakage and
 backward-incompatible changes.
+
+[![Hex.pm](https://img.shields.io/hexpm/l/xfighter.svg?style=flat-square)](https://hex.pm/packages/xfighter)
+[![Hex.pm](https://img.shields.io/hexpm/v/xfighter.svg?style=flat-square)](https://hex.pm/packages/xfighter)
+[![Hex.pm](https://img.shields.io/hexpm/dt/xfighter.svg?style=flat-square)](https://hex.pm/packages/xfighter)
 
 ## Installation
 
