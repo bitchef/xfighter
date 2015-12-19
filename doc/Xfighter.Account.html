@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.2">
-    <title>Xfighter.Account – xfighter v0.0.1</title>
+    <title>Xfighter.Account – xfighter v0.1.0</title>
     <link rel="stylesheet" href="dist/app-feafe9a25b.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -27,7 +27,7 @@
         xfighter
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.0.1
+        v0.1.0
       </h2>
     </div>
     
@@ -61,7 +61,7 @@
 
 
       <h1>
-        <small class="visible-xs">xfighter v0.0.1</small>
+        <small class="visible-xs">xfighter v0.1.0</small>
         Xfighter.Account
         
         
@@ -152,18 +152,29 @@
     </a>
     <span class="signature">orders(account, stock, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/account.ex#L113" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/account.ex#L118" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">orders(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) ::
+  {:ok, <a href="Xfighter.AccountStatus.html#t:t/0">Xfighter.AccountStatus.t</a>} |
+  {:error, tuple}</code></pre>
+        
+      </div>
+    </div>
   
   <section class="docstring">
     <p>Get the status for all orders in a stock for an account.</p>
 <h2>Examples:</h2>
 <pre><code class="iex elixir">iex&gt; Xfighter.Account.orders(&quot;EXB123456&quot;, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
 {:ok,
- %{ok: true,
+ %Xfighter.AccountStatus{ok: true,
     orders: [%{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
                fills: [%{price: 100, qty: 1000, ts: &quot;2015-12-17T21:05:41.973124481Z&quot;},
                  %{price: 5000, qty: 1000, ts: &quot;2015-12-17T21:06:21.389102834Z&quot;},
@@ -192,7 +203,7 @@ iex&gt; Xfighter.Account.orders(&quot;EXB123456&quot;, &quot;F&quot;, &quot;TEST
     </a>
     <span class="signature">orders!(account, stock, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/account.ex#L159" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/account.ex#L167" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -202,9 +213,7 @@ iex&gt; Xfighter.Account.orders(&quot;EXB123456&quot;, &quot;F&quot;, &quot;TEST
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">orders!(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
-        
-          <pre><code class="elixir">orders!(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+          <pre><code class="elixir">orders!(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="Xfighter.AccountStatus.html#t:t/0">Xfighter.AccountStatus.t</a></code></pre>
         
       </div>
     </div>
@@ -222,9 +231,10 @@ iex&gt; Xfighter.Account.orders(&quot;EXB123456&quot;, &quot;F&quot;, &quot;TEST
 </ul>
 <p>A <code class="inline">ConnectionError</code> exception is raised if a connection attempt to the venue failed.</p>
 <p>An <code class="inline">UnhandledAPIResponse</code> exception is raised if an unexpected event occurs.</p>
+<p>An <code class="inline">InvalidJSON</code> is raised if the response is not a valid JSON.</p>
 <h2>Examples:</h2>
 <pre><code class="iex elixir">iex&gt; Xfighter.Account.orders!(&quot;EXB123456&quot;, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
- %{ok: true,
+ %Xfighter.AccountStatus{ok: true,
     orders: [%{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
                fills: [%{price: 100, qty: 1000, ts: &quot;2015-12-17T21:05:41.973124481Z&quot;},
                  %{price: 5000, qty: 1000, ts: &quot;2015-12-17T21:06:21.389102834Z&quot;},
@@ -253,7 +263,7 @@ iex&gt; Xfighter.Account.orders!(&quot;EXB123456&quot;, &quot;F&quot;, &quot;TES
     </a>
     <span class="signature">status(account, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/account.ex#L36" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/account.ex#L38" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -264,7 +274,7 @@ iex&gt; Xfighter.Account.orders!(&quot;EXB123456&quot;, &quot;F&quot;, &quot;TES
       <div class="specs-list">
         
           <pre><code class="elixir">status(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) ::
-  {:ok, <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a>} |
+  {:ok, <a href="Xfighter.AccountStatus.html#t:t/0">Xfighter.AccountStatus.t</a>} |
   {:error, tuple}</code></pre>
         
       </div>
@@ -275,7 +285,7 @@ iex&gt; Xfighter.Account.orders!(&quot;EXB123456&quot;, &quot;F&quot;, &quot;TES
 <h2>Examples:</h2>
 <pre><code class="iex elixir">iex&gt; Xfighter.Account.status(&quot;EXB123456&quot;, &quot;TESTEX&quot;)
 {:ok,
- %{ok: true,
+ %Xfighter.AccountStatus{ok: true,
    orders: [%{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
               fills: [%{price: 100, qty: 1000, ts: &quot;2015-12-17T21:05:41.973124481Z&quot;},
                       %{price: 5000, qty: 1000, ts: &quot;2015-12-17T21:06:21.389102834Z&quot;},
@@ -304,7 +314,7 @@ iex&gt; Xfighter.Account.status(&quot;SUPERUSER&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">status!(account, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/account.ex#L79" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/account.ex#L84" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -314,7 +324,7 @@ iex&gt; Xfighter.Account.status(&quot;SUPERUSER&quot;, &quot;TESTEX&quot;)
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">status!(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+          <pre><code class="elixir">status!(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="Xfighter.AccountStatus.html#t:t/0">Xfighter.AccountStatus.t</a></code></pre>
         
       </div>
     </div>
@@ -330,9 +340,10 @@ iex&gt; Xfighter.Account.status(&quot;SUPERUSER&quot;, &quot;TESTEX&quot;)
 </ul>
 <p>A <code class="inline">ConnectionError</code> exception is raised if a connection attempt to the venue failed.</p>
 <p>An <code class="inline">UnhandledAPIResponse</code> exception is raised if an unexpected event occurs.</p>
+<p>An <code class="inline">InvalidJSON</code> is raised if the response is not a valid JSON.</p>
 <h2>Examples:</h2>
 <pre><code class="iex elixir">iex&gt; Xfighter.Account.status!(&quot;EXB123456&quot;, &quot;TESTEX&quot;)
- %{ok: true,
+ %Xfighter.AccountStatus{ok: true,
    orders: [%{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
               fills: [%{price: 100, qty: 1000, ts: &quot;2015-12-17T21:05:41.973124481Z&quot;},
                       %{price: 5000, qty: 1000, ts: &quot;2015-12-17T21:06:21.389102834Z&quot;},

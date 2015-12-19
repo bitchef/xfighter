@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.2">
-    <title>Xfighter.API – xfighter v0.0.1</title>
+    <title>Xfighter.API – xfighter v0.1.0</title>
     <link rel="stylesheet" href="dist/app-feafe9a25b.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -27,7 +27,7 @@
         xfighter
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.0.1
+        v0.1.0
       </h2>
     </div>
     
@@ -61,7 +61,7 @@
 
 
       <h1>
-        <small class="visible-xs">xfighter v0.0.1</small>
+        <small class="visible-xs">xfighter v0.1.0</small>
         Xfighter.API
         
         
@@ -102,6 +102,12 @@
       <a href="#functions">Functions</a>
     </h2>
     <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#decode_response/2">decode_response(arg1, options)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
   <div class="summary-signature">
     <a href="#delete/3">delete(url, headers \\ [], options \\ [])</a>
   </div>
@@ -179,12 +185,6 @@ failure</p>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#parse_response/1">parse_response(arg1)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="#patch/4">patch(url, body, headers \\ [], options \\ [])</a>
   </div>
   
@@ -242,13 +242,13 @@ failure</p>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#request/2">request(atom, url)</a>
+    <a href="#request/2">request(atom, path)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#request/3">request(atom, url, body)</a>
+    <a href="#request/3">request(atom, path, body)</a>
   </div>
   
 </div>
@@ -317,14 +317,31 @@ exception in case of failure</p>
             </a>
             Functions
           </h1>
-          <div class="detail" id="delete/3">
+          <div class="detail" id="decode_response/2">
+  <div class="detail-header">
+    <a href="#decode_response/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">decode_response(arg1, options)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L40" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="delete/3">
   <div class="detail-header">
     <a href="#delete/3" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
     <span class="signature">delete(url, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -356,7 +373,7 @@ otherwise.</p>
     </a>
     <span class="signature">delete!(url, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -388,7 +405,7 @@ failure.</p>
     </a>
     <span class="signature">get(url, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -420,7 +437,7 @@ otherwise.</p>
     </a>
     <span class="signature">get!(url, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -452,7 +469,7 @@ failure.</p>
     </a>
     <span class="signature">head(url, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -484,7 +501,7 @@ otherwise.</p>
     </a>
     <span class="signature">head!(url, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -516,7 +533,7 @@ failure.</p>
     </a>
     <span class="signature">options(url, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -548,7 +565,7 @@ otherwise.</p>
     </a>
     <span class="signature">options!(url, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -573,23 +590,6 @@ failure.</p>
 
   </section>
 </div>
-<div class="detail" id="parse_response/1">
-  <div class="detail-header">
-    <a href="#parse_response/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">parse_response(arg1)</span>
-      
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L45" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-  </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
 <div class="detail" id="patch/4">
   <div class="detail-header">
     <a href="#patch/4" class="detail-link" title="Link to this function">
@@ -597,7 +597,7 @@ failure.</p>
     </a>
     <span class="signature">patch(url, body, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -629,7 +629,7 @@ otherwise.</p>
     </a>
     <span class="signature">patch!(url, body, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -661,7 +661,7 @@ failure.</p>
     </a>
     <span class="signature">post(url, body, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -693,7 +693,7 @@ otherwise.</p>
     </a>
     <span class="signature">post!(url, body, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -725,7 +725,7 @@ failure.</p>
     </a>
     <span class="signature">put(url, body, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -757,7 +757,7 @@ otherwise.</p>
     </a>
     <span class="signature">put!(url, body, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -787,9 +787,9 @@ failure.</p>
     <a href="#request/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">request(atom, url)</span>
+    <span class="signature">request(atom, path)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L26" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L20" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -804,9 +804,9 @@ failure.</p>
     <a href="#request/3" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">request(atom, url, body)</span>
+    <span class="signature">request(atom, path, body)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L38" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L32" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -823,7 +823,7 @@ failure.</p>
     </a>
     <span class="signature">request(method, url, body \\ &quot;&quot;, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -901,7 +901,7 @@ request is successful, <code class="inline">{:error, reason}</code> otherwise.</
     </a>
     <span class="signature">request!(method, url, body \\ &quot;&quot;, headers \\ [], options \\ [])</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -932,7 +932,7 @@ request fails.</p>
     </a>
     <span class="signature">start()</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/api.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     

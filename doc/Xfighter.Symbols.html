@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.2">
-    <title>Xfighter.Venue – xfighter v0.1.0</title>
+    <title>Xfighter.Symbols – xfighter v0.1.0</title>
     <link rel="stylesheet" href="dist/app-feafe9a25b.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -62,10 +62,10 @@
 
       <h1>
         <small class="visible-xs">xfighter v0.1.0</small>
-        Xfighter.Venue
+        Xfighter.Symbols
         
         
-          <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/venue.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/symbols.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -82,24 +82,21 @@
             Summary
           </h1>
           
-
-          
-  <div class="summary-functions summary">
+  <div class="summary-types summary">
     <h2>
-      <a href="#functions">Functions</a>
+      <a href="#types">Types</a>
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#heartbeat/1">heartbeat(venue)</a>
+    <a href="#t:t/0">t()</a>
   </div>
-  
-    <div class="summary-synopsis"><p>Check if a venue is up</p>
-</div>
   
 </div>
 
   </div>
 
+
+          
 
           
 
@@ -109,47 +106,23 @@
       
 
       
-
-      
-        <section id="functions" class="details-list">
+        <section id="types" class="types details-list">
           <h1 class="section-heading">
-            <a class="hover-link" href="#functions">
+            <a class="hover-link" href="#types">
               <i class="icon-link"></i>
             </a>
-            Functions
+            Types
           </h1>
-          <div class="detail" id="heartbeat/1">
-  <div class="detail-header">
-    <a href="#heartbeat/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">heartbeat(venue)</span>
-      
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/venue.ex#L16" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-  </div>
+          <div class="types-list">
+            <div id="t:t/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %Xfighter.Symbols{ok: boolean, symbols: [<a href="Xfighter.Stock.html#t:symbol/0">Xfighter.Stock.symbol</a>], symbol: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}</code></pre>
   
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">heartbeat(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: boolean</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>Check if a venue is up.</p>
-<h2>Example:</h2>
-<pre><code class="iex elixir">iex&gt; Xfighter.Venue.heartbeat(&quot;TESTEX&quot;)
-true</code></pre>
-
-  </section>
 </div>
 
+          </div>
         </section>
+      
+
       
 
       
