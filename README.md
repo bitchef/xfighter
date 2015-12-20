@@ -70,10 +70,10 @@ iex> Xfighter.Venue.heartbeat("TESTEX")
 iex> Xfighter.Stock.list("TESTEX")
 ```
 
-### The orderbook for a stock
+### The state of the orderbook for a stock
 
 ```elixir
-iex> Xfighter.Stock.orderbook("FOOBAR", "TESTEX")
+iex> Xfighter.Orderbook.state("FOOBAR", "TESTEX")
 ```
 
 ### Place an order for a stock
