@@ -3,7 +3,6 @@ defmodule Xfighter.Stock do
   alias Xfighter.Exception.InvalidJSON
   alias Xfighter.Exception.RequestError
   alias Xfighter.Order
-  alias Xfighter.Orderbook
   alias Xfighter.Quote
   alias Xfighter.Symbols
 
@@ -64,66 +63,6 @@ defmodule Xfighter.Stock do
   def list!(venue) when is_bitstring(venue) do
     request(:get, "/venues/#{venue}/stocks")
     |> decode_response(as: Symbols)
-  end
-
-  @doc """
-  Get the orderbook for a particular stock.
-
-  ## Examples:
-      iex> Xfighter.Stock.orderbook("FOOBAR", "TESTEX")
-      {:ok,
-       %Xfighter.Orderbook{asks: [%{isBuy: false, price: 6000, qty: 3320},
-                %{isBuy: false, price: 6000, qty: 5000}],
-         bids: [%{isBuy: true, price: 5850, qty: 2554654},
-                %{isBuy: true, price: 5000, qty: 375879}],
-         ok: true, symbol: "FOOBAR", ts: "2015-12-17T23:30:37.455298328Z",
-         venue: "TESTEX"}}
-
-      iex> Xfighter.Stock.orderbook("FOOBAR", "TEST")
-      {:error, {:request, "Error 404:  No venue exists with the symbol TEST"}}
-  """
-  @spec orderbook(String.t, String.t) :: {:ok, Orderbook.t} | {:error, tuple}
-
-  def orderbook(stock, venue) when is_bitstring(stock) and is_bitstring(venue) do
-    try do
-      {:ok, orderbook!(stock, venue)}
-    rescue
-      e in RequestError -> {:error, {:request, RequestError.message(e)}}
-      e in ConnectionError -> {:error, {:connection, ConnectionError.message(e)}}
-      e in InvalidJSON -> {:error, {:json, InvalidJSON.message(e)}}
-    end
-  end
-
-  @doc """
-  Get the orderbook for a particular stock.
-
-  A `RequestError` exception is raised if the venue could not be found or
-  the stock is not traded on the venue.
-
-  A `ConnectionError` exception is raised if a connection attempt to the venue failed.
-
-  An `UnhandledAPIResponse` exception is raised if an unexpected event occurs.
-
-  An `InvalidJSON` is raised if the response is not a valid JSON.
-
-  ## Examples:
-
-      iex> Xfighter.Stock.orderbook!("FOOBAR", "TESTEX")
-       %Xfighter.Orderbook{asks: [%{isBuy: false, price: 6000, qty: 3320},
-                %{isBuy: false, price: 6000, qty: 5000}],
-         bids: [%{isBuy: true, price: 5850, qty: 2554654},
-                %{isBuy: true, price: 5000, qty: 375879}],
-         ok: true, symbol: "FOOBAR", ts: "2015-12-17T23:30:37.455298328Z",
-         venue: "TESTEX"}
-
-      iex> Xfighter.Stock.orderbook!("FOOBAR", "TEST")
-      ** (RequestError) Error 404:  No venue exists with the symbol TEST
-  """
-  @spec orderbook!(String.t, String.t) :: Orderbook.t
-
-  def orderbook!(stock, venue) when is_bitstring(stock) and is_bitstring(venue) do
-    request(:get, "/venues/#{venue}/stocks/#{stock}")
-    |> decode_response(as: Orderbook)
   end
 
   @doc """
