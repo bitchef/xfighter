@@ -17,7 +17,7 @@ To use Xfighter in your Mix projects:
 
   ```elixir
   def deps do
-      [{:xfighter, "~> 0.1.0"}]
+      [{:xfighter, "~> 0.2.0"}]
   end
   ```
 

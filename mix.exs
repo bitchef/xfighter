@@ -3,7 +3,7 @@ defmodule Xfighter.Mixfile do
 
   def project do
     [app: :xfighter,
-     version: "0.1.1",
+     version: "0.2.0",
      name: "xfighter",
      source_url: "https://github.com/bitchef/xfighter",
      elixir: "~> 1.1",

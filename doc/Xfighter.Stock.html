@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.2">
-    <title>Xfighter.Stock – xfighter v0.1.1</title>
+    <title>Xfighter.Stock – xfighter v0.2.0</title>
     <link rel="stylesheet" href="dist/app-feafe9a25b.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -27,7 +27,7 @@
         xfighter
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.1.1
+        v0.2.0
       </h2>
     </div>
     
@@ -61,7 +61,7 @@
 
 
       <h1>
-        <small class="visible-xs">xfighter v0.1.1</small>
+        <small class="visible-xs">xfighter v0.2.0</small>
         Xfighter.Stock
         
         
@@ -134,24 +134,6 @@
   </div>
   
     <div class="summary-synopsis"><p>List stocks available for trading on a venue</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#orderbook/2">orderbook(stock, venue)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Get the orderbook for a particular stock</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#orderbook!/2">orderbook!(stock, venue)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Get the orderbook for a particular stock</p>
 </div>
   
 </div>
@@ -235,7 +217,7 @@
     </a>
     <span class="signature">buy(qty, stock, venue, account, order_type, price \\ 0)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L212" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L151" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -279,7 +261,7 @@ iex&gt; Xfighter.Stock.buy(10, &quot;F&quot;, &quot;TESTEX&quot;, &quot;EXB12345
     </a>
     <span class="signature">buy!(qty, stock, venue, account, order_type, price \\ 0)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L254" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L193" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -334,7 +316,7 @@ iex&gt; Xfighter.Stock.buy!(10, &quot;F&quot;, &quot;TESTEX&quot;, &quot;EXB1234
     </a>
     <span class="signature">list(venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L31" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L30" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -372,7 +354,7 @@ iex&gt; Xfighter.Stock.list(&quot;TEST&quot;)
     </a>
     <span class="signature">list!(venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L64" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L63" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -404,90 +386,6 @@ iex&gt; Xfighter.Stock.list!(&quot;TEST&quot;)
 
   </section>
 </div>
-<div class="detail" id="orderbook/2">
-  <div class="detail-header">
-    <a href="#orderbook/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">orderbook(stock, venue)</span>
-      
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L87" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">orderbook(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) ::
-  {:ok, <a href="Xfighter.Orderbook.html#t:t/0">Xfighter.Orderbook.t</a>} |
-  {:error, tuple}</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>Get the orderbook for a particular stock.</p>
-<h2>Examples:</h2>
-<pre><code class="iex elixir">iex&gt; Xfighter.Stock.orderbook(&quot;FOOBAR&quot;, &quot;TESTEX&quot;)
-{:ok,
- %Xfighter.Orderbook{asks: [%{isBuy: false, price: 6000, qty: 3320},
-          %{isBuy: false, price: 6000, qty: 5000}],
-   bids: [%{isBuy: true, price: 5850, qty: 2554654},
-          %{isBuy: true, price: 5000, qty: 375879}],
-   ok: true, symbol: &quot;FOOBAR&quot;, ts: &quot;2015-12-17T23:30:37.455298328Z&quot;,
-   venue: &quot;TESTEX&quot;}}
-
-iex&gt; Xfighter.Stock.orderbook(&quot;FOOBAR&quot;, &quot;TEST&quot;)
-{:error, {:request, &quot;Error 404:  No venue exists with the symbol TEST&quot;}}</code></pre>
-
-  </section>
-</div>
-<div class="detail" id="orderbook!/2">
-  <div class="detail-header">
-    <a href="#orderbook!/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">orderbook!(stock, venue)</span>
-      
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L124" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">orderbook!(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="Xfighter.Orderbook.html#t:t/0">Xfighter.Orderbook.t</a></code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>Get the orderbook for a particular stock.</p>
-<p>A <code class="inline">RequestError</code> exception is raised if the venue could not be found or
-the stock is not traded on the venue.</p>
-<p>A <code class="inline">ConnectionError</code> exception is raised if a connection attempt to the venue failed.</p>
-<p>An <code class="inline">UnhandledAPIResponse</code> exception is raised if an unexpected event occurs.</p>
-<p>An <code class="inline">InvalidJSON</code> is raised if the response is not a valid JSON.</p>
-<h2>Examples:</h2>
-<pre><code class="iex elixir">iex&gt; Xfighter.Stock.orderbook!(&quot;FOOBAR&quot;, &quot;TESTEX&quot;)
- %Xfighter.Orderbook{asks: [%{isBuy: false, price: 6000, qty: 3320},
-          %{isBuy: false, price: 6000, qty: 5000}],
-   bids: [%{isBuy: true, price: 5850, qty: 2554654},
-          %{isBuy: true, price: 5000, qty: 375879}],
-   ok: true, symbol: &quot;FOOBAR&quot;, ts: &quot;2015-12-17T23:30:37.455298328Z&quot;,
-   venue: &quot;TESTEX&quot;}
-
-iex&gt; Xfighter.Stock.orderbook!(&quot;FOOBAR&quot;, &quot;TEST&quot;)
-** (RequestError) Error 404:  No venue exists with the symbol TEST</code></pre>
-
-  </section>
-</div>
 <div class="detail" id="quote/2">
   <div class="detail-header">
     <a href="#quote/2" class="detail-link" title="Link to this function">
@@ -495,7 +393,7 @@ iex&gt; Xfighter.Stock.orderbook!(&quot;FOOBAR&quot;, &quot;TEST&quot;)
     </a>
     <span class="signature">quote(stock, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L147" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L86" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -535,7 +433,7 @@ iex&gt; Xfighter.Stock.quote(&quot;F&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">quote!(stock, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L185" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L124" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -584,7 +482,7 @@ iex&gt; Xfighter.Stock.quote!(&quot;F&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">sell(qty, stock, venue, account, order_type, price \\ 0)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L287" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L226" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -628,7 +526,7 @@ iex&gt; Xfighter.Stock.sell(10, &quot;F&quot;, &quot;TESTEX&quot;, &quot;EXB1234
     </a>
     <span class="signature">sell!(qty, stock, venue, account, order_type, price \\ 0)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L330" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/stock.ex#L269" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     

@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.2">
-    <title>Xfighter.Orderbook – xfighter v0.1.1</title>
+    <title>Xfighter.Orderbook – xfighter v0.2.0</title>
     <link rel="stylesheet" href="dist/app-feafe9a25b.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -27,7 +27,7 @@
         xfighter
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.1.1
+        v0.2.0
       </h2>
     </div>
     
@@ -61,7 +61,7 @@
 
 
       <h1>
-        <small class="visible-xs">xfighter v0.1.1</small>
+        <small class="visible-xs">xfighter v0.2.0</small>
         Xfighter.Orderbook
         
         
@@ -103,6 +103,31 @@
 
 
           
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#state/2">state(stock, venue)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Get the orderbook for a particular stock</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#state!/2">state!(stock, venue)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Get the orderbook for a particular stock</p>
+</div>
+  
+</div>
+
+  </div>
+
 
           
 
@@ -133,6 +158,102 @@
         </section>
       
 
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="state/2">
+  <div class="detail-header">
+    <a href="#state/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">state(stock, venue)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/orderbook.ex#L44" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">state(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) ::
+  {:ok, <a href="Xfighter.Orderbook.html#t:t/0">Xfighter.Orderbook.t</a>} |
+  {:error, tuple}</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Get the orderbook for a particular stock.</p>
+<h2>Examples:</h2>
+<pre><code class="iex elixir">iex&gt; Xfighter.Orderbook.state(&quot;FOOBAR&quot;, &quot;TESTEX&quot;)
+{:ok,
+ %Xfighter.Orderbook{
+   asks: [%{isBuy: false, price: 6000, qty: 3320},
+          %{isBuy: false, price: 6000, qty: 5000}],
+   bids: [%{isBuy: true, price: 5850, qty: 2554654},
+          %{isBuy: true, price: 5000, qty: 375879}],
+   ok: true, symbol: &quot;FOOBAR&quot;, ts: &quot;2015-12-17T23:30:37.455298328Z&quot;,
+   venue: &quot;TESTEX&quot;}}
+
+iex&gt; Xfighter.Orderbook.state(&quot;FOOBAR&quot;, &quot;TEST&quot;)
+{:error, {:request, &quot;Error 404:  No venue exists with the symbol TEST&quot;}}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="state!/2">
+  <div class="detail-header">
+    <a href="#state!/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">state!(stock, venue)</span>
+      
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/orderbook.ex#L84" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">state!(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="Xfighter.Orderbook.html#t:t/0">Xfighter.Orderbook.t</a></code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Get the orderbook for a particular stock.</p>
+<p>A <code class="inline">RequestError</code> exception is raised if the venue could not be found or
+the stock is not traded on the venue.</p>
+<p>A <code class="inline">ConnectionError</code> exception is raised if a connection attempt to the venue failed.</p>
+<p>An <code class="inline">UnhandledAPIResponse</code> exception is raised if an unexpected event occurs.</p>
+<p>An <code class="inline">InvalidJSON</code> is raised if the response is not a valid JSON.</p>
+<h2>Examples:</h2>
+<pre><code class="iex elixir">iex&gt; Xfighter.Orderbook.state!(&quot;FOOBAR&quot;, &quot;TESTEX&quot;)
+ %Xfighter.Orderbook{
+   asks: [%{isBuy: false, price: 6000, qty: 3320},
+          %{isBuy: false, price: 6000, qty: 5000}],
+   bids: [%{isBuy: true, price: 5850, qty: 2554654},
+          %{isBuy: true, price: 5000, qty: 375879}],
+   ok: true, symbol: &quot;FOOBAR&quot;, ts: &quot;2015-12-17T23:30:37.455298328Z&quot;,
+   venue: &quot;TESTEX&quot;}
+
+iex&gt; Xfighter.Orderbook.state!(&quot;FOOBAR&quot;, &quot;TEST&quot;)
+** (RequestError) Error 404:  No venue exists with the symbol TEST</code></pre>
+
+  </section>
+</div>
+
+        </section>
       
 
       
