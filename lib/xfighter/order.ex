@@ -56,7 +56,8 @@ defmodule Xfighter.Order do
          price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
          ts: "2015-12-18T00:03:40.640738101Z", venue: "TESTEX"}}
 
-      iex> Xfighter.Order.status(1660, "FOOBAR", "TESTEX")
+      iex> order = %Xfighter.Order(:id => 1660, :symbol => "FOOBAR", :venue => "TESTEX")
+      iex> Xfighter.Order.status(order)
       {:error,
        {:request,
          "Error 404:  order 1660 not found (highest available on this venue is 1650)"}}
@@ -64,6 +65,40 @@ defmodule Xfighter.Order do
   @spec status(__MODULE__.t) :: {:ok, OrderStatus.t} | {:error, tuple}
 
   def status(order=%__MODULE__{}), do: status(order.id, order.symbol, order.venue)
+
+  @doc """
+  Get the status of a list of existing orders.
+
+  ## Examples:
+
+      iex> order = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
+      iex> orders = [order, order]
+      iex> Xfighter.Order.status(orders)
+      {:ok,
+       %Xfighter.OrderStatus{account: "EXB123456", direction: "buy",
+         fills: [%{price: 6000, qty: 10, ts: "2015-12-18T00:03:40.640740258Z"}],
+         id: 1649, ok: true, open: false, orderType: "market", originalQty: 10,
+         price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
+         ts: "2015-12-18T00:03:40.640738101Z", venue: "TESTEX"}}
+
+      iex> order2 = %Xfighter.Order(:id => 1660, :symbol => "FOOBAR", :venue => "TESTEX")
+      iex> orders = [order, order2]
+      iex> Xfighter.Order.status(orders)
+      {:error,
+       {:request,
+         "Error 404:  order 1660 not found (highest available on this venue is 1650)"}}
+  """
+  @spec status([__MODULE__.t]) :: {:ok, [OrderStatus.t]} | {:error, tuple}
+
+  def status(orders) do
+    try do
+      {:ok, status!(orders)}
+    rescue
+      e in RequestError -> {:error, {:request, RequestError.message(e)}}
+      e in ConnectionError -> {:error, {:connection, ConnectionError.message(e)}}
+      e in InvalidJSON -> {:error, {:json, InvalidJSON.message(e)}}
+    end
+  end
 
   @doc """
   Get the status of an existing order.
@@ -111,6 +146,7 @@ defmodule Xfighter.Order do
 
   ## Examples:
 
+      iex> order = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
       iex> Xfighter.Order.status!(order)
        %Xfighter.OrderStatus{account: "EXB123456", direction: "buy",
          fills: [%{price: 6000, qty: 10, ts: "2015-12-18T00:03:40.640740258Z"}],
@@ -118,12 +154,54 @@ defmodule Xfighter.Order do
          price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
          ts: "2015-12-18T00:03:40.640738101Z", venue: "TESTEX"}
 
-      iex> Xfighter.Order.status!(1660, "FOOBAR", "TESTEX")
+      iex> order = %Xfighter.Order(:id => 1660, :symbol => "FOOBAR", :venue => "TESTEX")
+      iex> Xfighter.Order.status!(order)
       ** (RequestError) Error 404:  order 1660 not found (highest available on this venue is 1650)
   """
   @spec status!(__MODULE__.t) :: OrderStatus.t
 
   def status!(order=%__MODULE__{}), do: status!(order.id, order.symbol, order.venue)
+
+  @doc """
+  Get the status of a list of existing orders.
+
+  A `RequestError` exception is raised if:
+    - the venue could not be found
+    - the stock is not traded on the venue
+    - the order id is invalid
+
+  A `ConnectionError` exception is raised if a connection attempt to the venue failed.
+
+  An `UnhandledAPIResponse` exception is raised if an unexpected event occurs.
+
+  An `InvalidJSON` is raised if the response is not a valid JSON.
+
+  ## Examples:
+
+      iex> order = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
+      iex> orders = [order, order]
+      iex> Xfighter.Order.status!(orders)
+       [%Xfighter.OrderStatus{account: "EXB123456", direction: "buy",
+         fills: [%{price: 6000, qty: 10, ts: "2015-12-18T00:03:40.640740258Z"}],
+         id: 1649, ok: true, open: false, orderType: "market", originalQty: 10,
+         price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
+         ts: "2015-12-18T00:03:40.640738101Z", venue: "TESTEX"},
+       %Xfighter.OrderStatus{account: "EXB123456", direction: "buy",
+         fills: [%{price: 6000, qty: 10, ts: "2015-12-18T00:03:40.640740258Z"}],
+         id: 1649, ok: true, open: false, orderType: "market", originalQty: 10,
+         price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
+         ts: "2015-12-18T00:03:40.640738101Z", venue: "TESTEX"}]
+
+      iex> order2 = %Xfighter.Order(:id => 1660, :symbol => "FOOBAR", :venue => "TESTEX")
+      iex> orders = [order, order2]
+      iex> Xfighter.Order.status!(orders)
+      ** (RequestError) Error 404:  order 1660 not found (highest available on this venue is 1650)
+  """
+  @spec status!([__MODULE__.t]) :: [OrderStatus.t]
+
+  def status!(orders) when is_list(orders) do
+    for order <- orders, do: status!(order)
+  end
 
   @doc """
   Get the status of an existing order.
@@ -172,7 +250,8 @@ defmodule Xfighter.Order do
          price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
          ts: "2015-12-18T00:03:40.640738101Z", venue: "TESTEX"}}
 
-      iex> Xfighter.Order.cancel(1660, "FOOBAR", "TESTEX")
+      iex> order = %Xfighter.Order(:id => 1660, :symbol => "FOOBAR", :venue => "TESTEX")
+      iex> Xfighter.Order.cancel(order)
       {:error,
        {:request,
          "Error 404:  order 1660 not found (highest available on this venue is 1650)"}}
@@ -180,6 +259,45 @@ defmodule Xfighter.Order do
   @spec cancel(__MODULE__.t) :: {:ok, OrderStatus.t} | {:error, tuple}
 
   def cancel(order=%__MODULE__{}), do: cancel(order.id, order.symbol, order.venue)
+
+  @doc """
+  Cancel a list of orders.
+
+  ## Examples:
+
+      iex> order = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
+      iex> orders = [order, order]
+      iex> Xfighter.Order.cancel(orders)
+      {:ok,
+       [%Xfighter.OrderStatus{account: "EXB123456", direction: "buy",
+         fills: [%{price: 6000, qty: 10, ts: "2015-12-18T00:03:40.640740258Z"}],
+         id: 1649, ok: true, open: false, orderType: "market", originalQty: 10,
+         price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
+         ts: "2015-12-18T00:03:40.640738101Z", venue: "TESTEX"},
+       %Xfighter.OrderStatus{account: "EXB123456", direction: "buy",
+         fills: [%{price: 6000, qty: 10, ts: "2015-12-18T00:03:40.640740258Z"}],
+         id: 1649, ok: true, open: false, orderType: "market", originalQty: 10,
+         price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
+         ts: "2015-12-18T00:03:40.640738101Z", venue: "TESTEX"}]}
+
+      iex> order2 = %Xfighter.Order(:id => 1660, :symbol => "FOOBAR", :venue => "TESTEX")
+      iex> orders = [order, order2]
+      iex> Xfighter.Order.cancel(orders)
+      {:error,
+       {:request,
+         "Error 404:  order 1660 not found (highest available on this venue is 1650)"}}
+  """
+  @spec cancel([__MODULE__.t]) :: {:ok, [OrderStatus.t]} | {:error, tuple}
+
+  def cancel(orders) when is_list(orders) do
+    try do
+      {:ok, cancel!(orders)}
+    rescue
+      e in RequestError -> {:error, {:request, RequestError.message(e)}}
+      e in ConnectionError -> {:error, {:connection, ConnectionError.message(e)}}
+      e in InvalidJSON -> {:error, {:json, InvalidJSON.message(e)}}
+    end
+  end
 
   @doc """
   Cancel an order.
@@ -212,7 +330,7 @@ defmodule Xfighter.Order do
   end
 
   @doc """
-  Cancel an order.
+  Cancel an existing order.
 
   A `RequestError` exception is raised if:
     - the venue could not be found
@@ -227,6 +345,7 @@ defmodule Xfighter.Order do
 
   ## Examples:
 
+      iex> order = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
       iex> Xfighter.Order.cancel!(order)
        %Xfighter.OrderStatus{account: "EXB123456", direction: "buy",
          fills: [%{price: 6000, qty: 10, ts: "2015-12-18T00:03:40.640740258Z"}],
@@ -234,12 +353,54 @@ defmodule Xfighter.Order do
          price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
          ts: "2015-12-18T00:03:40.640738101Z", venue: "TESTEX"}
 
-      iex> Xfighter.Order.cancel!(1660, "FOOBAR", "TESTEX")
+      iex> order = %Xfighter.Order(:id => 1660, :symbol => "FOOBAR", :venue => "TESTEX")
+      iex> Xfighter.Order.cancel!(order)
       ** (RequestError) Error 404:  order 1660 not found (highest available on this venue is 1650)
   """
   @spec cancel!(__MODULE__.t) :: OrderStatus.t
 
   def cancel!(order=%__MODULE__{}), do: cancel!(order.id, order.symbol, order.venue)
+
+  @doc """
+  Cancel a list of orders.
+
+  A `RequestError` exception is raised if:
+    - the venue could not be found
+    - the stock is not traded on the venue
+    - the order id is invalid
+
+  A `ConnectionError` exception is raised if a connection attempt to the venue failed.
+
+  An `UnhandledAPIResponse` exception is raised if an unexpected event occurs.
+
+  An `InvalidJSON` is raised if the response is not a valid JSON.
+
+  ## Examples:
+
+      iex> order = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
+      iex> orders = [order, order]
+      iex> Xfighter.Order.cancel!(orders)
+       [%Xfighter.OrderStatus{account: "EXB123456", direction: "buy",
+         fills: [%{price: 6000, qty: 10, ts: "2015-12-18T00:03:40.640740258Z"}],
+         id: 1649, ok: true, open: false, orderType: "market", originalQty: 10,
+         price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
+         ts: "2015-12-18T00:03:40.640738101Z", venue: "TESTEX"},
+       %Xfighter.OrderStatus{account: "EXB123456", direction: "buy",
+         fills: [%{price: 6000, qty: 10, ts: "2015-12-18T00:03:40.640740258Z"}],
+         id: 1649, ok: true, open: false, orderType: "market", originalQty: 10,
+         price: 0, qty: 0, symbol: "FOOBAR", totalFilled: 10,
+         ts: "2015-12-18T00:03:40.640738101Z", venue: "TESTEX"}]
+
+      iex> order2 = %Xfighter.Order(:id => 1660, :symbol => "FOOBAR", :venue => "TESTEX")
+      iex> orders = [order, order2]
+      iex> Xfighter.Order.cancel!(orders)
+      ** (RequestError) Error 404:  order 1660 not found (highest available on this venue is 1650)
+  """
+  @spec cancel!([__MODULE__.t]) :: [OrderStatus.t]
+
+  def cancel!(orders) when is_list(orders) do
+    for order <- orders, do: cancel!(order)
+  end
 
   @doc """
   Cancel an order.
