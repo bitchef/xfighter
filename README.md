@@ -17,7 +17,7 @@ To use Xfighter in your Mix projects:
 
   ```elixir
   def deps do
-      [{:xfighter, "~> 0.2.0"}]
+      [{:xfighter, "~> 0.2.1"}]
   end
   ```
 
@@ -111,6 +111,14 @@ iex> order = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX
 iex> Xfighter.Order.status(order)
 ```
 
+### Status of a list of orders
+
+```elixir
+iex> order1 = %Xfighter.Order(:id => 1648, :symbol => "FOOBAR", :venue => "TESTEX")
+iex> order2 = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
+iex> Xfighter.Order.status([order1, order2])
+```
+
 ### Cancel an order
 
 ```elixir
@@ -122,6 +130,14 @@ Or if you have an existing `order` of type `Xfighter.Order.t`.
 ```elixir
 iex> order = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
 iex> Xfighter.Order.cancel(order)
+```
+
+### Cancel a list of orders
+
+```elixir
+iex> order1 = %Xfighter.Order(:id => 1648, :symbol => "FOOBAR", :venue => "TESTEX")
+iex> order2 = %Xfighter.Order(:id => 1649, :symbol => "FOOBAR", :venue => "TESTEX")
+iex> Xfighter.Order.cancel([order1, order2])
 ```
 
 ### Status for all orders in an account
