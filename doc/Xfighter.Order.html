@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.2">
-    <title>Xfighter.Order – xfighter v0.2.0</title>
+    <title>Xfighter.Order – xfighter v0.2.1</title>
     <link rel="stylesheet" href="dist/app-feafe9a25b.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -27,7 +27,7 @@
         xfighter
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.2.0
+        v0.2.1
       </h2>
     </div>
     
@@ -61,7 +61,7 @@
 
 
       <h1>
-        <small class="visible-xs">xfighter v0.2.0</small>
+        <small class="visible-xs">xfighter v0.2.1</small>
         Xfighter.Order
         
         
@@ -109,10 +109,10 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#cancel/1">cancel(order)</a>
+    <a href="#cancel/1">cancel(orders)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Cancel an order</p>
+    <div class="summary-synopsis"><p>Cancel a list of orders</p>
 </div>
   
 </div>
@@ -127,10 +127,10 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#cancel!/1">cancel!(order)</a>
+    <a href="#cancel!/1">cancel!(orders)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Cancel an order</p>
+    <div class="summary-synopsis"><p>Cancel a list of orders</p>
 </div>
   
 </div>
@@ -145,10 +145,10 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#status/1">status(order)</a>
+    <a href="#status/1">status(orders)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Get the status of an existing order</p>
+    <div class="summary-synopsis"><p>Get the status of a list of existing orders</p>
 </div>
   
 </div>
@@ -163,10 +163,10 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#status!/1">status!(order)</a>
+    <a href="#status!/1">status!(orders)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Get the status of an existing order</p>
+    <div class="summary-synopsis"><p>Get the status of a list of existing orders</p>
 </div>
   
 </div>
@@ -225,9 +225,9 @@
     <a href="#cancel/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">cancel(order)</span>
+    <span class="signature">cancel(orders)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L182" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L261" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -237,6 +237,10 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
+          <pre><code class="elixir">cancel([<a href="Xfighter.Order.html#t:t/0">Xfighter.Order.t</a>]) ::
+  {:ok, [<a href="Xfighter.OrderStatus.html#t:t/0">Xfighter.OrderStatus.t</a>]} |
+  {:error, tuple}</code></pre>
+        
           <pre><code class="elixir">cancel(<a href="Xfighter.Order.html#t:t/0">Xfighter.Order.t</a>) ::
   {:ok, <a href="Xfighter.OrderStatus.html#t:t/0">Xfighter.OrderStatus.t</a>} |
   {:error, tuple}</code></pre>
@@ -245,18 +249,26 @@
     </div>
   
   <section class="docstring">
-    <p>Cancel an order.</p>
+    <p>Cancel a list of orders.</p>
 <h2>Examples:</h2>
 <pre><code class="iex elixir">iex&gt; order = %Xfighter.Order(:id =&gt; 1649, :symbol =&gt; &quot;FOOBAR&quot;, :venue =&gt; &quot;TESTEX&quot;)
-iex&gt; Xfighter.Order.cancel(order)
+iex&gt; orders = [order, order]
+iex&gt; Xfighter.Order.cancel(orders)
 {:ok,
+ [%Xfighter.OrderStatus{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
+   fills: [%{price: 6000, qty: 10, ts: &quot;2015-12-18T00:03:40.640740258Z&quot;}],
+   id: 1649, ok: true, open: false, orderType: &quot;market&quot;, originalQty: 10,
+   price: 0, qty: 0, symbol: &quot;FOOBAR&quot;, totalFilled: 10,
+   ts: &quot;2015-12-18T00:03:40.640738101Z&quot;, venue: &quot;TESTEX&quot;},
  %Xfighter.OrderStatus{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
    fills: [%{price: 6000, qty: 10, ts: &quot;2015-12-18T00:03:40.640740258Z&quot;}],
    id: 1649, ok: true, open: false, orderType: &quot;market&quot;, originalQty: 10,
    price: 0, qty: 0, symbol: &quot;FOOBAR&quot;, totalFilled: 10,
-   ts: &quot;2015-12-18T00:03:40.640738101Z&quot;, venue: &quot;TESTEX&quot;}}
+   ts: &quot;2015-12-18T00:03:40.640738101Z&quot;, venue: &quot;TESTEX&quot;}]}
 
-iex&gt; Xfighter.Order.cancel(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
+iex&gt; order2 = %Xfighter.Order(:id =&gt; 1660, :symbol =&gt; &quot;FOOBAR&quot;, :venue =&gt; &quot;TESTEX&quot;)
+iex&gt; orders = [order, order2]
+iex&gt; Xfighter.Order.cancel(orders)
 {:error,
  {:request,
    &quot;Error 404:  order 1660 not found (highest available on this venue is 1650)&quot;}}</code></pre>
@@ -270,7 +282,7 @@ iex&gt; Xfighter.Order.cancel(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">cancel(order_id, stock, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L204" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L322" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -310,9 +322,9 @@ iex&gt; Xfighter.Order.cancel(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     <a href="#cancel!/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">cancel!(order)</span>
+    <span class="signature">cancel!(orders)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L242" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L362" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -322,13 +334,15 @@ iex&gt; Xfighter.Order.cancel(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
+          <pre><code class="elixir">cancel!([<a href="Xfighter.Order.html#t:t/0">Xfighter.Order.t</a>]) :: [<a href="Xfighter.OrderStatus.html#t:t/0">Xfighter.OrderStatus.t</a>]</code></pre>
+        
           <pre><code class="elixir">cancel!(<a href="Xfighter.Order.html#t:t/0">Xfighter.Order.t</a>) :: <a href="Xfighter.OrderStatus.html#t:t/0">Xfighter.OrderStatus.t</a></code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    <p>Cancel an order.</p>
+    <p>Cancel a list of orders.</p>
 <p>A <code class="inline">RequestError</code> exception is raised if:</p>
 <ul>
 <li>the venue could not be found
@@ -342,14 +356,23 @@ iex&gt; Xfighter.Order.cancel(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
 <p>An <code class="inline">UnhandledAPIResponse</code> exception is raised if an unexpected event occurs.</p>
 <p>An <code class="inline">InvalidJSON</code> is raised if the response is not a valid JSON.</p>
 <h2>Examples:</h2>
-<pre><code class="iex elixir">iex&gt; Xfighter.Order.cancel!(order)
+<pre><code class="iex elixir">iex&gt; order = %Xfighter.Order(:id =&gt; 1649, :symbol =&gt; &quot;FOOBAR&quot;, :venue =&gt; &quot;TESTEX&quot;)
+iex&gt; orders = [order, order]
+iex&gt; Xfighter.Order.cancel!(orders)
+ [%Xfighter.OrderStatus{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
+   fills: [%{price: 6000, qty: 10, ts: &quot;2015-12-18T00:03:40.640740258Z&quot;}],
+   id: 1649, ok: true, open: false, orderType: &quot;market&quot;, originalQty: 10,
+   price: 0, qty: 0, symbol: &quot;FOOBAR&quot;, totalFilled: 10,
+   ts: &quot;2015-12-18T00:03:40.640738101Z&quot;, venue: &quot;TESTEX&quot;},
  %Xfighter.OrderStatus{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
    fills: [%{price: 6000, qty: 10, ts: &quot;2015-12-18T00:03:40.640740258Z&quot;}],
    id: 1649, ok: true, open: false, orderType: &quot;market&quot;, originalQty: 10,
    price: 0, qty: 0, symbol: &quot;FOOBAR&quot;, totalFilled: 10,
-   ts: &quot;2015-12-18T00:03:40.640738101Z&quot;, venue: &quot;TESTEX&quot;}
+   ts: &quot;2015-12-18T00:03:40.640738101Z&quot;, venue: &quot;TESTEX&quot;}]
 
-iex&gt; Xfighter.Order.cancel!(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
+iex&gt; order2 = %Xfighter.Order(:id =&gt; 1660, :symbol =&gt; &quot;FOOBAR&quot;, :venue =&gt; &quot;TESTEX&quot;)
+iex&gt; orders = [order, order2]
+iex&gt; Xfighter.Order.cancel!(orders)
 ** (RequestError) Error 404:  order 1660 not found (highest available on this venue is 1650)</code></pre>
 
   </section>
@@ -361,7 +384,7 @@ iex&gt; Xfighter.Order.cancel!(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">cancel!(order_id, stock, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L272" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L433" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -408,9 +431,9 @@ iex&gt; Xfighter.Order.cancel!(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     <a href="#status/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">status(order)</span>
+    <span class="signature">status(orders)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L66" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L67" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -420,6 +443,10 @@ iex&gt; Xfighter.Order.cancel!(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
+          <pre><code class="elixir">status([<a href="Xfighter.Order.html#t:t/0">Xfighter.Order.t</a>]) ::
+  {:ok, [<a href="Xfighter.OrderStatus.html#t:t/0">Xfighter.OrderStatus.t</a>]} |
+  {:error, tuple}</code></pre>
+        
           <pre><code class="elixir">status(<a href="Xfighter.Order.html#t:t/0">Xfighter.Order.t</a>) ::
   {:ok, <a href="Xfighter.OrderStatus.html#t:t/0">Xfighter.OrderStatus.t</a>} |
   {:error, tuple}</code></pre>
@@ -428,10 +455,11 @@ iex&gt; Xfighter.Order.cancel!(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     </div>
   
   <section class="docstring">
-    <p>Get the status of an existing order.</p>
+    <p>Get the status of a list of existing orders.</p>
 <h2>Examples:</h2>
 <pre><code class="iex elixir">iex&gt; order = %Xfighter.Order(:id =&gt; 1649, :symbol =&gt; &quot;FOOBAR&quot;, :venue =&gt; &quot;TESTEX&quot;)
-iex&gt; Xfighter.Order.status(order)
+iex&gt; orders = [order, order]
+iex&gt; Xfighter.Order.status(orders)
 {:ok,
  %Xfighter.OrderStatus{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
    fills: [%{price: 6000, qty: 10, ts: &quot;2015-12-18T00:03:40.640740258Z&quot;}],
@@ -439,7 +467,9 @@ iex&gt; Xfighter.Order.status(order)
    price: 0, qty: 0, symbol: &quot;FOOBAR&quot;, totalFilled: 10,
    ts: &quot;2015-12-18T00:03:40.640738101Z&quot;, venue: &quot;TESTEX&quot;}}
 
-iex&gt; Xfighter.Order.status(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
+iex&gt; order2 = %Xfighter.Order(:id =&gt; 1660, :symbol =&gt; &quot;FOOBAR&quot;, :venue =&gt; &quot;TESTEX&quot;)
+iex&gt; orders = [order, order2]
+iex&gt; Xfighter.Order.status(orders)
 {:error,
  {:request,
    &quot;Error 404:  order 1660 not found (highest available on this venue is 1650)&quot;}}</code></pre>
@@ -453,7 +483,7 @@ iex&gt; Xfighter.Order.status(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">status(order_id, stock, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L88" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L123" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -493,9 +523,9 @@ iex&gt; Xfighter.Order.status(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     <a href="#status!/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">status!(order)</span>
+    <span class="signature">status!(orders)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L126" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L163" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -505,13 +535,15 @@ iex&gt; Xfighter.Order.status(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
+          <pre><code class="elixir">status!([<a href="Xfighter.Order.html#t:t/0">Xfighter.Order.t</a>]) :: [<a href="Xfighter.OrderStatus.html#t:t/0">Xfighter.OrderStatus.t</a>]</code></pre>
+        
           <pre><code class="elixir">status!(<a href="Xfighter.Order.html#t:t/0">Xfighter.Order.t</a>) :: <a href="Xfighter.OrderStatus.html#t:t/0">Xfighter.OrderStatus.t</a></code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    <p>Get the status of an existing order.</p>
+    <p>Get the status of a list of existing orders.</p>
 <p>A <code class="inline">RequestError</code> exception is raised if:</p>
 <ul>
 <li>the venue could not be found
@@ -525,14 +557,23 @@ iex&gt; Xfighter.Order.status(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
 <p>An <code class="inline">UnhandledAPIResponse</code> exception is raised if an unexpected event occurs.</p>
 <p>An <code class="inline">InvalidJSON</code> is raised if the response is not a valid JSON.</p>
 <h2>Examples:</h2>
-<pre><code class="iex elixir">iex&gt; Xfighter.Order.status!(order)
+<pre><code class="iex elixir">iex&gt; order = %Xfighter.Order(:id =&gt; 1649, :symbol =&gt; &quot;FOOBAR&quot;, :venue =&gt; &quot;TESTEX&quot;)
+iex&gt; orders = [order, order]
+iex&gt; Xfighter.Order.status!(orders)
+ [%Xfighter.OrderStatus{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
+   fills: [%{price: 6000, qty: 10, ts: &quot;2015-12-18T00:03:40.640740258Z&quot;}],
+   id: 1649, ok: true, open: false, orderType: &quot;market&quot;, originalQty: 10,
+   price: 0, qty: 0, symbol: &quot;FOOBAR&quot;, totalFilled: 10,
+   ts: &quot;2015-12-18T00:03:40.640738101Z&quot;, venue: &quot;TESTEX&quot;},
  %Xfighter.OrderStatus{account: &quot;EXB123456&quot;, direction: &quot;buy&quot;,
    fills: [%{price: 6000, qty: 10, ts: &quot;2015-12-18T00:03:40.640740258Z&quot;}],
    id: 1649, ok: true, open: false, orderType: &quot;market&quot;, originalQty: 10,
    price: 0, qty: 0, symbol: &quot;FOOBAR&quot;, totalFilled: 10,
-   ts: &quot;2015-12-18T00:03:40.640738101Z&quot;, venue: &quot;TESTEX&quot;}
+   ts: &quot;2015-12-18T00:03:40.640738101Z&quot;, venue: &quot;TESTEX&quot;}]
 
-iex&gt; Xfighter.Order.status!(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
+iex&gt; order2 = %Xfighter.Order(:id =&gt; 1660, :symbol =&gt; &quot;FOOBAR&quot;, :venue =&gt; &quot;TESTEX&quot;)
+iex&gt; orders = [order, order2]
+iex&gt; Xfighter.Order.status!(orders)
 ** (RequestError) Error 404:  order 1660 not found (highest available on this venue is 1650)</code></pre>
 
   </section>
@@ -544,7 +585,7 @@ iex&gt; Xfighter.Order.status!(1660, &quot;FOOBAR&quot;, &quot;TESTEX&quot;)
     </a>
     <span class="signature">status!(order_id, stock, venue)</span>
       
-      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L156" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bitchef/xfighter/blob/master/lib/xfighter/order.ex#L234" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
